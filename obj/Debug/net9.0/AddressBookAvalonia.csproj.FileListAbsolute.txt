@@ -65,6 +65,7 @@
 /Users/patriciastanca/AddressBookAvalonia/obj/Debug/net9.0/AddressBookAvalonia.AssemblyInfoInputs.cache
 /Users/patriciastanca/AddressBookAvalonia/obj/Debug/net9.0/AddressBookAvalonia.AssemblyInfo.cs
 /Users/patriciastanca/AddressBookAvalonia/obj/Debug/net9.0/AddressBookAvalonia.csproj.CoreCompileInputs.cache
+/Users/patriciastanca/AddressBookAvalonia/obj/Debug/net9.0/AddressBookAvalonia.sourcelink.json
 /Users/patriciastanca/AddressBookAvalonia/obj/Debug/net9.0/AddressB.C1F817D3.Up2Date
 /Users/patriciastanca/AddressBookAvalonia/obj/Debug/net9.0/AddressBookAvalonia.dll
 /Users/patriciastanca/AddressBookAvalonia/obj/Debug/net9.0/refint/AddressBookAvalonia.dll

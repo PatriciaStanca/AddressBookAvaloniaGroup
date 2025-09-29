@@ -38,12 +38,12 @@ namespace AddressBookAvalonia.Services
                 c.City.Contains(term, System.StringComparison.OrdinalIgnoreCase)).ToList();
         }
 
-        private void SaveContacts()
+        public void SaveContacts()
         {
             File.WriteAllLines(filePath, contacts.Select(c => c.ToFileFormat()));
         }
 
-        private void LoadContacts()
+        public void LoadContacts()
         {
             if (File.Exists(filePath))
             {

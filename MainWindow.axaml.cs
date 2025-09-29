@@ -16,14 +16,15 @@ namespace AddressBookAvalonia
         {
             InitializeComponent();
             RefreshList(addressBook.GetAllContacts());
+            this.Closing += OnClosing;
         }
 
         // ---------------- ADD ----------------
         private async void OnAddClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            if (!IsInputValid())
+            if (!IsInputValid(out string errorMessage))
             {
-                await ShowValidationError();
+                await ShowValidationError(errorMessage);
                 return;
             }
 
@@ -47,9 +48,9 @@ namespace AddressBookAvalonia
         {
             if (ContactsList.SelectedItem is Contact contact)
             {
-                if (!IsInputValid())
+                if (!IsInputValid(out string errorMessage))
                 {
-                    await ShowValidationError();
+                    await ShowValidationError(errorMessage);
                     return;
                 }
 
@@ -60,6 +61,7 @@ namespace AddressBookAvalonia
                 contact.Phone = PhoneBox.Text ?? "";
                 contact.Email = EmailBox.Text ?? "";
 
+                addressBook.SaveContacts();
                 RefreshList(addressBook.GetAllContacts());
             }
         }
@@ -122,8 +124,37 @@ namespace AddressBookAvalonia
 
                 var saveButton = new Button { Content = "Save", Margin = new Thickness(0, 10, 0, 0) };
 
-                saveButton.Click += (_, __) =>
+                saveButton.Click += async (_, __) =>
                 {
+                    if (string.IsNullOrWhiteSpace(nameBox.Text) ||
+                        string.IsNullOrWhiteSpace(streetBox.Text) ||
+                        string.IsNullOrWhiteSpace(zipBox.Text) ||
+                        string.IsNullOrWhiteSpace(cityBox.Text) ||
+                        string.IsNullOrWhiteSpace(phoneBox.Text) ||
+                        string.IsNullOrWhiteSpace(emailBox.Text))
+                    {
+                        await ShowValidationError("All fields must be filled.");
+                        return;
+                    }
+
+                    if (!int.TryParse(zipBox.Text, out int _))
+                    {
+                        await ShowValidationError("Zip code must be numeric.");
+                        return;
+                    }
+
+                    if (!long.TryParse(phoneBox.Text, out long _))
+                    {
+                        await ShowValidationError("Phone must be numeric.");
+                        return;
+                    }
+
+                    if (!emailBox.Text.Contains("@"))
+                    {
+                        await ShowValidationError("Email must contain @.");
+                        return;
+                    }
+
                     contact.Name = nameBox.Text ?? "";
                     contact.Street = streetBox.Text ?? "";
                     contact.ZipCode = zipBox.Text ?? "";
@@ -131,6 +162,7 @@ namespace AddressBookAvalonia
                     contact.Phone = phoneBox.Text ?? "";
                     contact.Email = emailBox.Text ?? "";
 
+                    addressBook.SaveContacts();
                     RefreshList(addressBook.GetAllContacts());
                     editWindow.Close();
                 };
@@ -166,17 +198,43 @@ namespace AddressBookAvalonia
             EmailBox.Text = "";
         }
 
-        private bool IsInputValid()
+        private bool IsInputValid(out string errorMessage)
         {
-            return !(string.IsNullOrWhiteSpace(NameBox.Text) ||
-                     string.IsNullOrWhiteSpace(StreetBox.Text) ||
-                     string.IsNullOrWhiteSpace(ZipBox.Text) ||
-                     string.IsNullOrWhiteSpace(CityBox.Text) ||
-                     string.IsNullOrWhiteSpace(PhoneBox.Text) ||
-                     string.IsNullOrWhiteSpace(EmailBox.Text));
+            errorMessage = "";
+
+            if (string.IsNullOrWhiteSpace(NameBox.Text) ||
+                string.IsNullOrWhiteSpace(StreetBox.Text) ||
+                string.IsNullOrWhiteSpace(ZipBox.Text) ||
+                string.IsNullOrWhiteSpace(CityBox.Text) ||
+                string.IsNullOrWhiteSpace(PhoneBox.Text) ||
+                string.IsNullOrWhiteSpace(EmailBox.Text))
+            {
+                errorMessage = "All fields must be filled.";
+                return false;
+            }
+
+            if (!int.TryParse(ZipBox.Text, out int _))
+            {
+                errorMessage = "Zip code must be numeric.";
+                return false;
+            }
+
+            if (!long.TryParse(PhoneBox.Text, out long _))
+            {
+                errorMessage = "Phone must be numeric.";
+                return false;
+            }
+
+            if (!EmailBox.Text.Contains("@"))
+            {
+                errorMessage = "Email must contain @.";
+                return false;
+            }
+
+            return true;
         }
 
-        private async System.Threading.Tasks.Task ShowValidationError()
+        private async System.Threading.Tasks.Task ShowValidationError(string message)
         {
             var dialog = new Window
             {
@@ -185,13 +243,18 @@ namespace AddressBookAvalonia
                 Height = 150,
                 Content = new TextBlock
                 {
-                    Text = "All fields are required. Please fill in all values.",
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center
+                    Text = message,
+                    HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                    VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center
                 }
             };
 
             await dialog.ShowDialog(this);
+        }
+
+        private void OnClosing(object? sender, System.ComponentModel.CancelEventArgs e)
+        {
+            addressBook.SaveContacts();
         }
     }
 }
