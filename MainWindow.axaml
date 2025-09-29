@@ -1,0 +1,41 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="AddressBookAvalonia.MainWindow"
+        Title="Address Book" Width="650" Height="500">
+
+  <StackPanel Margin="10">
+    <!-- Input fields -->
+    <TextBox Name="NameBox" Watermark="Name"/>
+    <TextBox Name="StreetBox" Watermark="Street"/>
+    <TextBox Name="ZipBox" Watermark="Zip code"/>
+    <TextBox Name="CityBox" Watermark="City"/>
+    <TextBox Name="PhoneBox" Watermark="Phone"/>
+    <TextBox Name="EmailBox" Watermark="Email"/>
+
+    <!-- Buttons -->
+    <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+      <Button Content="Add Contact" Click="OnAddClick" Margin="0,0,5,0"/>
+      <Button Content="Update Selected" Click="OnUpdateClick" Margin="0,0,5,0"/>
+      <Button Content="Delete Selected" Click="OnDeleteClick"/>
+    </StackPanel>
+
+    <!-- Search -->
+    <TextBox Name="SearchBox" Watermark="Search by name or city" KeyUp="OnSearchKeyUp"/>
+
+    <!-- List of contacts with edit icon -->
+    <ListBox Name="ContactsList" Height="250" SelectionChanged="OnContactSelected">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+            <!-- Show the contact -->
+            <TextBlock Text="{Binding}" Width="500"/>
+            <!-- Edit button -->
+            <Button Width="30" Height="30" Click="OnEditClick">
+              <TextBlock Text="✏️" FontSize="16"/>
+            </Button>
+          </StackPanel>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+  </StackPanel>
+</Window>
