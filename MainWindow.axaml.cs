@@ -63,6 +63,7 @@ namespace AddressBookAvalonia
 
                 addressBook.SaveContacts();
                 RefreshList(addressBook.GetAllContacts());
+                ClearInputs();
             }
         }
 
