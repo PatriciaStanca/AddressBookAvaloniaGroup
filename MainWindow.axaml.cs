@@ -15,7 +15,7 @@ namespace AddressBookAvalonia
         public MainWindow()
         {
             InitializeComponent();
-            RefreshList(addressBook.GetAllContacts());
+            ContactsList.ItemsSource = addressBook.Contacts;
             this.Closing += OnClosing;
         }
 
@@ -39,7 +39,6 @@ namespace AddressBookAvalonia
             };
 
             addressBook.AddContact(contact);
-            RefreshList(addressBook.GetAllContacts());
             ClearInputs();
         }
 
@@ -62,7 +61,6 @@ namespace AddressBookAvalonia
                 contact.Email = EmailBox.Text ?? "";
 
                 addressBook.SaveContacts();
-                RefreshList(addressBook.GetAllContacts());
                 ClearInputs();
             }
         }
@@ -73,7 +71,6 @@ namespace AddressBookAvalonia
             if (ContactsList.SelectedItem is Contact contact)
             {
                 addressBook.DeleteContact(contact);
-                RefreshList(addressBook.GetAllContacts());
                 ClearInputs();
             }
         }
@@ -83,10 +80,12 @@ namespace AddressBookAvalonia
         {
             string term = SearchBox.Text ?? "";
             if (string.IsNullOrWhiteSpace(term))
-                RefreshList(addressBook.GetAllContacts());
+                ContactsList.ItemsSource = addressBook.Contacts;
             else
-                RefreshList(addressBook.Search(term));
+                ContactsList.ItemsSource = addressBook.Search(term);
         }
+
+
 
         // ---------------- AUTOFILL ----------------
         private void OnContactSelected(object? sender, SelectionChangedEventArgs e)
@@ -164,7 +163,6 @@ namespace AddressBookAvalonia
                     contact.Email = emailBox.Text ?? "";
 
                     addressBook.SaveContacts();
-                    RefreshList(addressBook.GetAllContacts());
                     editWindow.Close();
                 };
 
@@ -183,11 +181,6 @@ namespace AddressBookAvalonia
         }
 
         // ---------------- HELPERS ----------------
-        private void RefreshList(List<Contact> contacts)
-        {
-            ContactsList.ItemsSource = null;
-            ContactsList.ItemsSource = contacts;
-        }
 
         private void ClearInputs()
         {

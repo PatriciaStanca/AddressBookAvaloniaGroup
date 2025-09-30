@@ -2,53 +2,72 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using AddressBookAvalonia.Models;
-
 
 namespace AddressBookAvalonia.Services
 {
     public class AddressBook
     {
         private readonly string filePath = "addressbook.txt";
-        private List<Contact> contacts = new();
+
+        // Changed from List<Contact> to ObservableCollection<Contact>
+        public ObservableCollection<Contact> Contacts { get; } = new();
 
         public AddressBook()
         {
             LoadContacts();
         }
 
-        public List<Contact> GetAllContacts() => contacts;
+        public IReadOnlyList<Contact> GetAllContacts() => Contacts;
 
         public void AddContact(Contact contact)
         {
-            contacts.Add(contact);
+            Contacts.Add(contact);
             SaveContacts();
         }
 
         public void DeleteContact(Contact contact)
         {
-            contacts.Remove(contact);
+            if (contact is null) return;
+            Contacts.Remove(contact);
             SaveContacts();
         }
 
         public List<Contact> Search(string term)
         {
-            return contacts.Where(c =>
-                c.Name.Contains(term, System.StringComparison.OrdinalIgnoreCase) ||
-                c.City.Contains(term, System.StringComparison.OrdinalIgnoreCase)).ToList();
+            if (string.IsNullOrWhiteSpace(term)) return Contacts.ToList();
+
+            return Contacts.Where(c =>
+                   c.Name?.Contains(term, StringComparison.OrdinalIgnoreCase) == true
+                || c.City?.Contains(term, StringComparison.OrdinalIgnoreCase) == true)
+                .ToList();
         }
 
         public void SaveContacts()
         {
-            File.WriteAllLines(filePath, contacts.Select(c => c.ToFileFormat()));
+            File.WriteAllLines(filePath, Contacts.Select(c => c.ToFileFormat()));
         }
 
         private void LoadContacts()
         {
-            if (File.Exists(filePath))
+            Contacts.Clear();
+
+            if (!File.Exists(filePath)) return;
+
+            foreach (var line in File.ReadAllLines(filePath))
             {
-                var lines = File.ReadAllLines(filePath);
-                contacts = lines.Select(Contact.FromFileFormat).ToList();
+                if (string.IsNullOrWhiteSpace(line)) continue;
+
+                try
+                {
+                    var c = Contact.FromFileFormat(line);
+                    if (c != null) Contacts.Add(c);
+                }
+                catch
+                {
+                    // Ignore malformed lines
+                }
             }
         }
     }
