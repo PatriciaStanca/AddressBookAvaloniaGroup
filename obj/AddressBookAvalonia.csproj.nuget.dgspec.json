@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/patriciastanca/AddressBookAvalonia/AddressBookAvalonia.csproj": {}
+    "/Users/patriciastanca/AddressBookAvalonia (kopia)/AddressBookAvalonia.csproj": {}
   },
   "projects": {
-    "/Users/patriciastanca/AddressBookAvalonia/AddressBookAvalonia.csproj": {
+    "/Users/patriciastanca/AddressBookAvalonia (kopia)/AddressBookAvalonia.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/patriciastanca/AddressBookAvalonia/AddressBookAvalonia.csproj",
+        "projectUniqueName": "/Users/patriciastanca/AddressBookAvalonia (kopia)/AddressBookAvalonia.csproj",
         "projectName": "AddressBookAvalonia",
-        "projectPath": "/Users/patriciastanca/AddressBookAvalonia/AddressBookAvalonia.csproj",
+        "projectPath": "/Users/patriciastanca/AddressBookAvalonia (kopia)/AddressBookAvalonia.csproj",
         "packagesPath": "/Users/patriciastanca/.nuget/packages/",
-        "outputPath": "/Users/patriciastanca/AddressBookAvalonia/obj/",
+        "outputPath": "/Users/patriciastanca/AddressBookAvalonia (kopia)/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/patriciastanca/.nuget/NuGet/NuGet.Config"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pEQ3q8ID5sI=",
+  "dgSpecHash": "KdDHQOH6QTo=",
   "success": true,
-  "projectFilePath": "/Users/patriciastanca/AddressBookAvalonia/AddressBookAvalonia.csproj",
+  "projectFilePath": "/Users/patriciastanca/AddressBookAvalonia (kopia)/AddressBookAvalonia.csproj",
   "expectedPackageFiles": [
     "/Users/patriciastanca/.nuget/packages/avalonia/11.3.6/avalonia.11.3.6.nupkg.sha512",
     "/Users/patriciastanca/.nuget/packages/avalonia.angle.windows.natives/2.1.25547.20250602/avalonia.angle.windows.natives.2.1.25547.20250602.nupkg.sha512",
