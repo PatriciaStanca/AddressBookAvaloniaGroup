@@ -43,7 +43,7 @@ namespace AddressBookAvalonia.Services
             File.WriteAllLines(filePath, contacts.Select(c => c.ToFileFormat()));
         }
 
-        public void LoadContacts()
+        private void LoadContacts()
         {
             if (File.Exists(filePath))
             {
