@@ -63,6 +63,11 @@
                 Background="#C0392B"
                 Foreground="White"
                 Click="OnDeleteClick"/>
+        <Button x:Name="ClearButton"
+                Content="Clear"
+                Background="#7F8C8D"
+                Foreground="White"
+                Click="OnClearClick"/>
       </StackPanel>
     </StackPanel>
 

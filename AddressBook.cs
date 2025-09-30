@@ -40,7 +40,12 @@ namespace AddressBookAvalonia.Services
 
             return Contacts.Where(c =>
                    c.Name?.Contains(term, StringComparison.OrdinalIgnoreCase) == true
-                || c.City?.Contains(term, StringComparison.OrdinalIgnoreCase) == true)
+                || c.City?.Contains(term, StringComparison.OrdinalIgnoreCase) == true
+                || c.Email?.Contains(term, StringComparison.OrdinalIgnoreCase) == true
+                || c.Phone?.Contains(term, StringComparison.OrdinalIgnoreCase) == true
+                || c.Street?.Contains(term, StringComparison.OrdinalIgnoreCase) == true
+                || c.ZipCode?.Contains(term, StringComparison.OrdinalIgnoreCase) == true
+            )
                 .ToList();
         }
 

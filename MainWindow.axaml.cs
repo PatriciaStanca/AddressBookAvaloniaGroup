@@ -101,6 +101,12 @@ namespace AddressBookAvalonia
             }
         }
 
+        private void OnClearClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            ClearInputs();
+            ContactsList.SelectedItem = null;
+        }
+
         // ---------------- POPUP EDIT ----------------
         private async void OnEditClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
