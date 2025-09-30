@@ -1,4 +1,2 @@
 Paricia Stanca|Janne 123|42542|Göteborg|0737737373|patricia@
-anna|hej|||9120|jdiao@hotmail
-kalle|anka|456|jhh|999|sjs@
-Patricia|JAJA |444|sss|073|sss@gmail
+test to add|hello|12345|gbggg|84894943|test@
