@@ -25,7 +25,7 @@
 
     <!-- Left panel: input form -->
     <StackPanel DockPanel.Dock="Left"
-                Width="250"
+                Width="350"
                 Spacing="8"
                 Margin="0,0,15,0">
       <TextBlock Text="Name"/>
@@ -68,6 +68,11 @@
                 Background="#7F8C8D"
                 Foreground="White"
                 Click="OnClearClick"/>
+		  <Button x:Name="DeleteAllButton"
+                Content="DeleteAll"
+                Background="#7B241C"
+                Foreground="White"
+                Click="OnDeleteAllClick"/>
       </StackPanel>
     </StackPanel>
 

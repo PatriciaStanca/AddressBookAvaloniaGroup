@@ -74,6 +74,12 @@ namespace AddressBookAvalonia
                 ClearInputs();
             }
         }
+        // ---------------- DELETE ALL----------------
+        private void OnDeleteAllClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            addressBook.DeleteAllContacts();
+            ClearInputs();
+        }
 
         // ---------------- SEARCH ----------------
         private void OnSearchKeyUp(object? sender, Avalonia.Input.KeyEventArgs e)

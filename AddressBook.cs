@@ -33,6 +33,11 @@ namespace AddressBookAvalonia.Services
             Contacts.Remove(contact);
             SaveContacts();
         }
+        public void DeleteAllContacts()
+        {
+            Contacts.Clear();
+        }
+
 
         public List<Contact> Search(string term)
         {
