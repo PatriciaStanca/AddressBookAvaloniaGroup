@@ -88,11 +88,13 @@
           <Border Margin="0,0,0,8" Padding="8">
             <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto">
               <TextBlock Grid.Row="0"
+                         Foreground="white"
                          Text="{Binding Name}"
                          FontSize="16"
                          FontWeight="Bold"/>
 
               <TextBlock Grid.Row="1"
+                        Foreground="white"
                          Margin="0,4,0,0">
                 <Run Text="{Binding Street}"/>
                 <Run Text=", "/>
@@ -101,7 +103,7 @@
                 <Run Text="{Binding City}"/>
               </TextBlock>
 
-              <TextBlock Grid.Row="2" Margin="0,4,0,0">
+              <TextBlock Grid.Row="2" Margin="0,4,0,0" Foreground="white">
                 <Run Text="{Binding Phone}"/>
                 <Run Text=" · "/>
                 <Run Text="{Binding Email}"/>
